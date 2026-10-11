@@ -24,6 +24,7 @@ import {
   LogOut
 } from 'lucide-react';
 import { ClinicalDepartment } from '../../types/clinical';
+import { ClinicalImage } from '../common/ClinicalImage';
 
 export const PatientPortal: React.FC = () => {
   const { 
@@ -99,8 +100,18 @@ export const PatientPortal: React.FC = () => {
               </div>
 
               {/* Unboxed Metadata Row */}
-              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 pt-1">
-                <span>Attending: <strong className="text-slate-800 font-medium">{currentPatient.assignedDoctorName}</strong></span>
+              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 pt-1">
+                <span className="flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200">
+                  <div className="w-5 h-5 rounded-md overflow-hidden shrink-0 border border-teal-200">
+                    <ClinicalImage
+                      src="/images/download (4).jpg"
+                      alt={currentPatient.assignedDoctorName}
+                      type="director"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span>Attending: <strong className="text-slate-800 font-medium">{currentPatient.assignedDoctorName}</strong></span>
+                </span>
                 <span aria-hidden="true">·</span>
                 <span>Payer: <strong className="text-slate-800 font-medium">{currentPatient.insuranceProvider}</strong></span>
                 <span aria-hidden="true">·</span>
@@ -572,10 +583,10 @@ export const PatientPortal: React.FC = () => {
             </div>
 
             {[
-              { id: 'cardiology', name: 'Clinical Cardiology', subtitle: 'Dr. Julian Vance', icon: Heart },
+              { id: 'cardiology', name: 'Clinical Cardiology', subtitle: 'Dr. Julian Vance', icon: Heart, image: '/images/download (4).jpg', imageType: 'director' as const },
               { id: 'neurology', name: 'Neurology & Stroke', subtitle: 'Dr. Alistair Chen', icon: Activity },
               { id: 'emergency', name: 'Emergency Dispatch', subtitle: 'Officer Liam (Trauma)', icon: PhoneCall },
-              { id: 'front_desk', name: 'Hospital Front Desk', subtitle: 'Shannon Sterling, RN', icon: User },
+              { id: 'front_desk', name: 'Hospital Front Desk', subtitle: 'Shannon Sterling, RN', icon: User, image: '/images/Nurse in surgical scrub_Nursing inspiration & healthcare career.jpg', imageType: 'nurse' as const },
               { id: 'billing', name: 'Billing & Claims', subtitle: 'Elena Rostova, CHC', icon: FileText },
               { id: 'pharmacy', name: 'Outpatient Pharmacy', subtitle: 'Dr. Marcus Thorne', icon: Pill }
             ].map(channel => {
@@ -591,7 +602,18 @@ export const PatientPortal: React.FC = () => {
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${isSelected ? 'text-white' : 'text-slate-400'}`} />
+                  {channel.image ? (
+                    <div className="w-5 h-5 rounded-md overflow-hidden shrink-0 mt-0.5 border border-white/40">
+                      <ClinicalImage
+                        src={channel.image}
+                        alt={channel.subtitle}
+                        type={channel.imageType}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${isSelected ? 'text-white' : 'text-slate-400'}`} />
+                  )}
                   <div className="truncate">
                     <div className="font-bold truncate">{channel.name}</div>
                     <div className={`text-[10px] truncate ${isSelected ? 'text-teal-100' : 'text-slate-400'}`}>{channel.subtitle}</div>

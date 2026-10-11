@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useClinical } from '../../context/ClinicalContext';
 import { X, Calendar, Clock, Stethoscope, Video, CheckCircle2, User, UserPlus, ArrowRight } from 'lucide-react';
 import { Appointment } from '../../types/clinical';
+import { ClinicalImage } from '../common/ClinicalImage';
 
 export const AppointmentBookingModal: React.FC = () => {
   const { 
@@ -171,6 +172,23 @@ export const AppointmentBookingModal: React.FC = () => {
                   </option>
                 ))}
               </select>
+
+              {/* Selected Clinician Preview Card with Verified Photo */}
+              <div className="mt-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-slate-200 bg-white">
+                  <ClinicalImage
+                    src={selectedDoctor.imageUrl || '/images/download (4).jpg'}
+                    alt={selectedDoctor.name}
+                    type={selectedDoctor.imageType || 'director'}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs font-bold text-slate-900 truncate">{selectedDoctor.name}</div>
+                  <div className="text-[11px] text-teal-700 truncate">{selectedDoctor.role}</div>
+                  <div className="text-[10px] text-slate-500 font-mono truncate">{selectedDoctor.credentials.split('·')[0]}</div>
+                </div>
+              </div>
             </div>
 
             {/* Visitor Contact Info if unauthenticated */}

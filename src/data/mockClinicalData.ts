@@ -18,6 +18,8 @@ export const CLINICAL_INSTITUTES: ClinicalInstitute[] = [
     directorName: 'Dr. Julian Vance, MD, FACC',
     directorRole: 'Director of Clinical Cardiology & Catheterization Laboratories',
     departmentCode: 'cardiology',
+    imageUrl: '/images/Best ECG Testing Centre in Chandigarh for Accurate Results.jpg',
+    imageType: 'team',
     keyServices: [
       'Primary Percutaneous Coronary Intervention (PCI)',
       '3D Carto-Guided Radiofrequency Arrhythmia Ablation',
@@ -168,10 +170,12 @@ export const INITIAL_STAFF_PERSONAS: StaffPersona[] = [
   {
     id: 'doc-vance',
     name: 'Dr. Julian Vance, MD, FACC',
-    role: 'Director of Clinical Cardiology',
+    role: 'Director of Clinical Cardiology & Geriatrics',
     credentials: 'Harvard Medical School · Mass General Cardiology Fellow · 18 Years Faculty',
     department: 'cardiology',
     avatarInitials: 'JV',
+    imageUrl: '/images/download (4).jpg',
+    imageType: 'director',
     bio: 'Pioneer in complex radial coronary interventions and structural heart repairs. Lead investigator on acute myocardial infarction clinical registries.',
     availableDays: ['Monday', 'Wednesday', 'Thursday', 'Friday']
   },
@@ -218,11 +222,13 @@ export const INITIAL_STAFF_PERSONAS: StaffPersona[] = [
   {
     id: 'desk-shannon',
     name: 'Shannon Sterling, RN',
-    role: 'Senior Clinical Coordinator & Front Desk',
-    credentials: 'BSN, RN · Certified Healthcare Access Manager (CHAM)',
+    role: 'Senior Clinical Coordinator & Nursing Lead',
+    credentials: 'BSN, RN · Certified Healthcare Access Manager (CHAM) · Geriatric Care Lead',
     department: 'front_desk',
     avatarInitials: 'SS',
-    bio: 'Coordinates patient journey, doctor referrals, multidisciplinary consults, and admission pathways.',
+    imageUrl: '/images/Nurse in surgical scrub_Nursing inspiration & healthcare career.jpg',
+    imageType: 'nurse',
+    bio: 'Coordinates 24/7 bedside nursing, multidisciplinary consults, senior living care, and patient admission pathways.',
     availableDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
   },
   {

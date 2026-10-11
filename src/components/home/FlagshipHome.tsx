@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useClinical } from '../../context/ClinicalContext';
 import { CLINICAL_INSTITUTES, RESEARCH_PAPERS, PATIENT_TESTIMONIALS, INITIAL_STAFF_PERSONAS } from '../../data/mockClinicalData';
+import { ClinicalImage } from '../common/ClinicalImage';
+import { ClinicMediaGalleryModal } from '../modals/ClinicMediaGalleryModal';
 import { 
   Heart, 
   Brain, 
@@ -27,7 +29,8 @@ import {
   ExternalLink,
   ShieldCheck,
   Lock,
-  UserPlus
+  UserPlus,
+  Image as ImageIcon
 } from 'lucide-react';
 
 export const FlagshipHome: React.FC = () => {
@@ -49,6 +52,7 @@ export const FlagshipHome: React.FC = () => {
 
   // Hero interactive heart rate simulator
   const [previewHeartRate, setPreviewHeartRate] = useState(72);
+  const [isMediaModalOpen, setIsMediaModalOpen] = useState(false);
 
   return (
     <div className="space-y-16 pb-20 bg-slate-50/50">
@@ -313,42 +317,84 @@ export const FlagshipHome: React.FC = () => {
       </section>
 
       {/* SECTION 4: THE FOUNDING COLLECTIVE ETHOS & STORY */}
+      {/* SECTION 4: THE FOUNDING COLLECTIVE ETHOS & MULTIDISCIPLINARY MEDICAL TEAM */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 shadow-clinical-lg relative overflow-hidden">
-          <div className="max-w-3xl space-y-5">
-            <div className="text-xs font-mono font-bold text-teal-400 uppercase tracking-wider flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              <span>The Founding Student-Physician Collective</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div className="lg:col-span-7 space-y-5">
+              <div className="text-xs font-mono font-bold text-teal-400 uppercase tracking-wider flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>The Founding Student-Physician Collective & Medical Faculty</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                Bridging Future, Present, and Past: How a Cohort of Medical Students Reimagined Hospital Care
+              </h2>
+
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                When clinical students David, Shannon, and their peers conducted bedside hospital rotations, they noticed that traditional healthcare portals were built exclusively for insurance billing codes rather than patient human understanding. Patients left with anxiety, misunderstood prescriptions, and zero visibility into their own physiology.
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                Together with senior clinical faculty, they established David & Shannon Clinic — a hospital where interactive biological simulations, continuous telemetry, and transparent two-way physician dialogue replace opaque medical paperwork.
+              </p>
+
+              <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
+                <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1">
+                  <div className="text-teal-400 font-bold">01. Total Transparency</div>
+                  <p className="text-slate-300 font-normal leading-relaxed text-[11px]">Real-time ECG waveforms, lab reference ranges, and itemized billing statements.</p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1">
+                  <div className="text-teal-400 font-bold">02. Interactive Education</div>
+                  <p className="text-slate-300 font-normal leading-relaxed text-[11px]">Virtual patient decision scenarios for patients, students, and caregivers alike.</p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1">
+                  <div className="text-teal-400 font-bold">03. 24/7 Lifeline Triage</div>
+                  <p className="text-slate-300 font-normal leading-relaxed text-[11px]">Immediate 10-second rapid intake connecting field EMS to attending surgeons.</p>
+                </div>
+              </div>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-              Bridging Future, Present, and Past: How a Cohort of Medical Students Reimagined Hospital Care
-            </h2>
-
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              When clinical students David, Shannon, and their peers conducted bedside hospital rotations, they noticed that traditional healthcare portals were built exclusively for insurance billing codes rather than patient human understanding. Patients left with anxiety, misunderstood prescriptions, and zero visibility into their own physiology.
-            </p>
-
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Together with senior clinical faculty, they established David & Shannon Clinic — a hospital where interactive biological simulations, continuous telemetry, and transparent two-way physician dialogue replace opaque medical paperwork.
-            </p>
-
-            <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-semibold">
-              <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1">
-                <div className="text-teal-400 font-bold">01. Total Transparency</div>
-                <p className="text-slate-300 font-normal leading-relaxed">Real-time ECG waveforms, lab reference ranges, and itemized billing statements.</p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1">
-                <div className="text-teal-400 font-bold">02. Interactive Education</div>
-                <p className="text-slate-300 font-normal leading-relaxed">Virtual patient decision scenarios for patients, students, and caregivers alike.</p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1">
-                <div className="text-teal-400 font-bold">03. 24/7 Lifeline Triage</div>
-                <p className="text-slate-300 font-normal leading-relaxed">Immediate 10-second rapid intake connecting field EMS to attending surgeons.</p>
+            {/* Right: Hospital Multidisciplinary Care Team Photography Asset */}
+            <div className="lg:col-span-5">
+              <div className="rounded-2xl overflow-hidden border border-slate-700/80 bg-slate-800 shadow-2xl space-y-0 group">
+                <div className="h-64 sm:h-72 w-full relative">
+                  <ClinicalImage
+                    src="/images/Best ECG Testing Centre in Chandigarh for Accurate Results.jpg"
+                    alt="David & Shannon Clinical Care Team"
+                    type="team"
+                    className="w-full h-full object-cover"
+                    showBadge={true}
+                    badgeLabel="Multidisciplinary Medical Cohort"
+                  />
+                </div>
+                <div className="p-5 bg-slate-950/90 border-t border-slate-800 space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-extrabold text-teal-300">Advanced Diagnostic & Clinical Faculty</span>
+                    <span className="text-[10px] font-mono text-teal-400/90 bg-teal-950/70 px-2 py-0.5 rounded border border-teal-800/60">
+                      5 Board-Certified Clinicians
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-400 leading-relaxed">
+                    Multidisciplinary team in clinical whites collaborating daily across cardiology, geriatric medicine, and high-acuity diagnostics.
+                  </p>
+                  <div className="pt-2 flex items-center justify-between border-t border-slate-800/80">
+                    <button
+                      onClick={() => setIsMediaModalOpen(true)}
+                      className="text-[11px] text-teal-400 hover:text-teal-300 font-bold flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <ImageIcon className="w-3.5 h-3.5" />
+                      <span>View Hospital Photography Suite</span>
+                    </button>
+                    <span className="text-[10px] font-mono text-slate-500">JCI Gold Accredited</span>
+                  </div>
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -582,35 +628,58 @@ export const FlagshipHome: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 8: DISTINGUISHED ATTENDING CLINICIANS */}
+      {/* SECTION 8: DISTINGUISHED ATTENDING CLINICIANS & NURSING LEADERSHIP */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-200 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-4">
           <div>
-            <div className="text-xs font-semibold text-teal-800 uppercase tracking-wider mb-1">
-              Physician Leadership
+            <div className="text-xs font-semibold text-teal-800 uppercase tracking-wider mb-1 flex items-center gap-2">
+              <Stethoscope className="w-4 h-4 text-teal-700" />
+              <span>Physician & Nursing Leadership</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              World-Class Attending Faculty
+              World-Class Attending Faculty & Clinical Caregivers
             </h2>
           </div>
-          <button
-            onClick={() => setIsAppointmentModalOpen(true)}
-            className="text-xs text-teal-800 hover:underline font-bold"
-          >
-            Schedule Consultation with Faculty
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsMediaModalOpen(true)}
+              className="text-xs text-teal-700 hover:text-teal-900 font-bold flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-50 hover:bg-teal-100 border border-teal-200 transition-colors cursor-pointer"
+            >
+              <ImageIcon className="w-3.5 h-3.5" />
+              <span>View Photography Gallery</span>
+            </button>
+            <button
+              onClick={() => setIsAppointmentModalOpen(true)}
+              className="text-xs text-slate-700 hover:text-slate-900 font-bold px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors cursor-pointer"
+            >
+              Schedule Consultation
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {INITIAL_STAFF_PERSONAS.slice(0, 4).map(doc => (
+          {[INITIAL_STAFF_PERSONAS[0], INITIAL_STAFF_PERSONAS[5], INITIAL_STAFF_PERSONAS[1], INITIAL_STAFF_PERSONAS[2]].map(doc => (
             <div
               key={doc.id}
-              className="rounded-2xl bg-white border border-slate-200 p-5 shadow-clinical flex flex-col justify-between space-y-4 hover:border-slate-300 transition-colors"
+              className="rounded-2xl bg-white border border-slate-200 p-4 shadow-clinical flex flex-col justify-between space-y-3 hover:border-slate-300 hover:shadow-clinical-lg transition-all"
             >
               <div className="space-y-3">
-                <div className="w-14 h-14 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-800 font-bold font-mono text-lg">
-                  {doc.avatarInitials}
-                </div>
+                {doc.imageUrl ? (
+                  <div className="h-44 w-full rounded-xl overflow-hidden relative shadow-xs border border-slate-200/80">
+                    <ClinicalImage
+                      src={doc.imageUrl}
+                      alt={doc.name}
+                      type={doc.imageType}
+                      className="w-full h-full object-cover"
+                      showBadge={true}
+                      badgeLabel={doc.id === 'doc-vance' ? 'Medical Director' : 'Nursing Lead'}
+                    />
+                  </div>
+                ) : (
+                  <div className="w-14 h-14 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-800 font-bold font-mono text-lg">
+                    {doc.avatarInitials}
+                  </div>
+                )}
 
                 <div>
                   <h3 className="text-base font-bold text-slate-900 leading-tight">
@@ -625,7 +694,7 @@ export const FlagshipHome: React.FC = () => {
                   {doc.bio}
                 </p>
 
-                <div className="text-[11px] text-slate-500 font-mono">
+                <div className="text-[11px] text-slate-500 font-mono truncate">
                   {doc.credentials.split('·')[0]}
                 </div>
               </div>
@@ -818,7 +887,15 @@ export const FlagshipHome: React.FC = () => {
           <div>
             © {new Date().getFullYear()} David & Shannon Clinic. Dedicated to student-led clinical empowerment and evidence-based patient transparency.
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
+            <button 
+              onClick={() => setIsMediaModalOpen(true)}
+              className="hover:text-teal-700 flex items-center gap-1 cursor-pointer font-medium"
+            >
+              <ImageIcon className="w-3 h-3 text-teal-600" />
+              <span>Hospital Photography Suite</span>
+            </button>
+            <span aria-hidden="true">·</span>
             <span className="hover:text-slate-800">Privacy & HIPAA Policy</span>
             <span aria-hidden="true">·</span>
             <span className="hover:text-slate-800">Patient Rights Charter</span>
@@ -836,6 +913,12 @@ export const FlagshipHome: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* Hospital Clinical Media & Photography Showcase Modal */}
+      <ClinicMediaGalleryModal
+        isOpen={isMediaModalOpen}
+        onClose={() => setIsMediaModalOpen(false)}
+      />
 
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useClinical } from '../../context/ClinicalContext';
 import { CLINICAL_INSTITUTES } from '../../data/mockClinicalData';
 import { ClinicalInstitute } from '../../types/clinical';
+import { ClinicalImage } from '../common/ClinicalImage';
 import { 
   Heart, 
   Brain, 
@@ -123,7 +124,20 @@ export const InstitutesDirectory: React.FC = () => {
           <div className="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-clinical space-y-8">
             
             {/* Institute Header */}
-            <div className="space-y-3 pb-6 border-b border-slate-100">
+            <div className="space-y-4 pb-6 border-b border-slate-100">
+              {activeInstitute.imageUrl && (
+                <div className="h-56 sm:h-64 w-full rounded-2xl overflow-hidden shadow-sm border border-slate-200 relative">
+                  <ClinicalImage
+                    src={activeInstitute.imageUrl}
+                    alt={activeInstitute.name}
+                    type={activeInstitute.imageType || 'team'}
+                    className="w-full h-full object-cover"
+                    showBadge={true}
+                    badgeLabel="Clinical Team & Cath Lab Facilities"
+                  />
+                </div>
+              )}
+
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="text-xs font-mono font-bold text-teal-700 bg-teal-50 px-2.5 py-1 rounded">
                   INSTITUTE CODE: {activeInstitute.departmentCode.toUpperCase()}
@@ -161,11 +175,20 @@ export const InstitutesDirectory: React.FC = () => {
                 {activeInstitute.summary}
               </p>
 
-              <div className="text-xs text-slate-500 pt-2 flex items-center gap-2">
-                <span>Clinical Leadership:</span>
-                <strong className="text-slate-800">{activeInstitute.directorName}</strong>
-                <span aria-hidden="true">·</span>
-                <span>{activeInstitute.directorRole}</span>
+              <div className="text-xs text-slate-500 pt-3 flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200/80">
+                <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-slate-200 bg-white shadow-xs">
+                  <ClinicalImage
+                    src="/images/download (4).jpg"
+                    alt={activeInstitute.directorName}
+                    type="director"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <div className="text-[10px] text-teal-800 uppercase font-mono font-bold">Clinical Institute Leadership</div>
+                  <div className="text-sm font-bold text-slate-900">{activeInstitute.directorName}</div>
+                  <div className="text-xs text-slate-600">{activeInstitute.directorRole}</div>
+                </div>
               </div>
             </div>
 

@@ -183,6 +183,8 @@ export interface StaffPersona {
   avatarInitials: string;
   bio: string;
   availableDays: string[];
+  imageUrl?: string;
+  imageType?: 'team' | 'director' | 'nurse' | 'facility' | 'general';
 }
 
 // Institutional Directory Types
@@ -194,6 +196,8 @@ export interface ClinicalInstitute {
   directorName: string;
   directorRole: string;
   departmentCode: ClinicalDepartment;
+  imageUrl?: string;
+  imageType?: 'team' | 'director' | 'nurse' | 'facility' | 'general';
   keyServices: string[];
   clinicalMetrics: {
     stat: string;
