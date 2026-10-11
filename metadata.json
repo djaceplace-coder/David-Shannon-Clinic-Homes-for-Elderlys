@@ -1,0 +1,6 @@
+{
+  "name": "David & Shannon Clinic",
+  "description": "World-class digital hospital and clinical learning platform featuring interactive medical education, virtual patient scenarios, multi-department 2-way doctor chat, and an administrative command desk.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
